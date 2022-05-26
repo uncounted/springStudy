@@ -19,10 +19,8 @@ public class PostRestController {
     private final PostService postService;
 
     @GetMapping("/api/posts")
-    public String getPosts(Model model){
-        List<Post> post = postRepository.findAllByOrderByModifiedAtDesc();
-        model.addAttribute("post", post);
-        return "post";
+    public List<Post> getPosts(){
+        return postRepository.findAllByOrderByModifiedAtDesc();
     }
 
     @PostMapping("/api/posts")
