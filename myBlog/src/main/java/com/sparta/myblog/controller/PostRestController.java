@@ -7,6 +7,7 @@ import com.sparta.myblog.models.PostRequestDto;
 import com.sparta.myblog.service.PostService;
 import com.sparta.myblog.utils.PasswordException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +19,10 @@ public class PostRestController {
     private final PostService postService;
 
     @GetMapping("/api/posts")
-    public List<Post> getPosts(){
-        return postRepository.findAll();
+    public String getPosts(Model model){
+        List<Post> post = postRepository.findAllByOrderByModifiedAtDesc();
+        model.addAttribute("post", post);
+        return "post";
     }
 
     @PostMapping("/api/posts")

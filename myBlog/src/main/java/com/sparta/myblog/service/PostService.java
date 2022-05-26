@@ -44,7 +44,8 @@ public class PostService {
     }
 
     private void checkPassword(PostRequestDto requestDto, Post post) throws PasswordException {
-        post.getPassword().equals(requestDto.getPassword());
-        throw new PasswordException("비밀번호가 틀렸습니다.");
+        if(!post.getPassword().equals(requestDto.getPassword())) {
+            throw new PasswordException("비밀번호가 틀렸습니다.");
+        }
     }
 }
